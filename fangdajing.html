@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>淘宝放大镜</title>
+    <link rel="stylesheet" href="css/demo.css">
+
+</head>
+<body>
+<!--设置中图小图显示的大盒子-->
+<div class="par">
+    <!--大图图层  设置默认加载图片不平铺   js可以改变行内样式 所以js要用的尽量放在行内-->
+    <div id="bgceng" style="background: url('image/bg1.jpg') no-repeat"></div>
+    <!--中图盒子   设置默认加载图片-->
+    <div class="middle_img">
+        <!--中图图层   js可以改变行内样式 所以js要用的尽量放在行内-->
+        <div id="ceng" style="width: 139px; height: 185px;"></div>
+        <img src="image/middle1.jpg" alt="" id="middle"/>
+    </div>
+    <!--小图盒子-->
+    <div class="small_img">
+        <!--               自定义属性 js调用改变中图和大图图片-->
+        <div class="small" data_middle="image/middle1.jpg" data_bg="image/bg1.jpg"><img src="image/small1.jpg"/></div>
+        <div class="small" data_middle="image/middle2.jpg" data_bg="image/bg2.jpg"><img src="image/small2.jpg"/></div>
+        <div class="small" data_middle="image/middle3.jpg" data_bg="image/bg3.jpg"><img src="image/small3.jpg"/></div>
+        <div class="small" data_middle="image/middle4.jpg" data_bg="image/bg4.jpg"><img src="image/small4.jpg"/></div>
+        <div class="small" data_middle="image/middle5.jpg" data_bg="image/bg5.jpg"><img src="image/small5.jpg"/></div>
+    </div>
+</div>
+<!--外链的script 尽量写在最后面 因为存在浏览器加载问题-->
+<script src="js/demo.js"></script>
+</body>
+</html>

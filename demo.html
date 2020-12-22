@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>放大镜</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .per{
+            position: relative;
+            width: 323px;
+            height: 506px;
+            border:1px silver solid;
+            margin-left: 205px;
+        }
+        .middle-img{
+            position: relative;
+            width: 323px;
+            height: 430px;
+            border-bottom: 1px solid silver;
+        }
+        .small-img{
+            width: 323px;
+            height: 76px;
+            text-align: center;/*水平居中*/
+            line-height: 76px;/*给父容器加行高*/
+        }
+        .small-img>div{
+            display: inline-block;/*保持块元素特性，但改为行内元素显示*/
+            width: 57px;
+            height: 60px;
+            border: 1px solid white;
+            vertical-align: middle;/*加完行高垂直居中*/
+        }
+        #ceng{
+            border: 1px silver solid;
+            position: absolute;
+            z-index: 2;
+            background-color: gray;
+            display: none;
+        }
+        #bgceng{
+            width: 323px;
+            height: 430px;
+            border: 1px solid red;
+            position: absolute;/*图层要设置绝对定位*/
+            z-index: 3;/*第三层*/
+            display: none;/*页面加载不显示*/
+            left: 325px;
+            background-size: 750px 1000px;
+        }
+    </style>
+</head>
+<body>
+<div class="per">
+    <div id="bgceng" style="background-image: url('image/bg1.jpg')"></div>
+    <div class="middle-img">
+        <div id="ceng" style="width: 139px; height: 185px;"></div>
+        <img src="image/middle1.jpg" id="middleimg">
+    </div>
+    <div class="small-img">
+    <div class="small" data_middle="image/middle1.jpg" data_bg="image/bg1.jpg"><img src="image/small1.jpg" ></div>
+    <div class="small" data_middle="image/middle2.jpg" data_bg="image/bg2.jpg"><img src="image/small2.jpg" ></div>
+    <div class="small" data_middle="image/middle3.jpg" data_bg="image/bg3.jpg"><img src="image/small3.jpg" ></div>
+    <div class="small" data_middle="image/middle4.jpg" data_bg="image/bg4.jpg"><img src="image/small4.jpg" ></div>
+    <div class="small" data_middle="image/middle5.jpg" data_bg="image/bg5.jpg"><img src="image/small5.jpg" ></div>
+</div>
+</div>
+<script>
+    //获取所有小图  备用
+    var smallist=document.getElementsByClassName("small");
+    //获取中图位置和初始化的图
+    var middleper=document.getElementsByClassName("middle-img")[0];
+    var middle=document.getElementById("middleimg");
+    //获取层
+    var ceng =document.getElementById("ceng");
+    var bgceng =document.getElementById("bgceng");
+    var big=document.getElementsByClassName("per")[0];
+    smallist[0].style.borderColor="red";
+    var befor=smallist[0];
+    //给每个小图设置边框
+    for (var i = 0; i < smallist.length; i++) {
+        smallist[i].onmouseenter=function (){
+            befor.style.borderColor="white";
+            this.style.borderColor="red";
+            befor=this;
+            //中图变化
+            var middleinfo=this.getAttribute("data_middle");//获取中图自定义属性
+            //中图的src位置发生变化
+            middle.src=middleinfo;
+            var bginfo=this.getAttribute("data_bg");//获取中图自定义属性
+            //中图的src位置发生变化
+            bgceng.style.backgroundImage="url('"+bginfo+"')";
+        }
+    }
+    middleper.onmouseenter=function (){
+        ceng.style.display="block";
+        bgceng.style.display="block";
+    }
+    middleper.onmouseleave=function (){
+        ceng.style.display="none";
+        bgceng.style.display="none";
+    }
+    middleper.onmousemove=function (e){
+        var pagex=e.pageX;
+        var pagey=e.pageY;
+        var left=big.offsetLeft;
+        var top=big.offsetTop;
+        pagex=pagex-left-parseInt(ceng.style.width)/2;
+        pagey=pagey-top-parseInt(ceng.style.height)/2;
+        //卡边
+        pagex=pagex<=0?0:pagex>=323-parseInt(ceng.style.width)?323-parseInt(ceng.style.width):pagex;
+        pagey=pagey<=0?0:pagey>=430-parseInt(ceng.style.height)?430-parseInt(ceng.style.height):pagey;
+        ceng.style.left=pagex+"px";
+        ceng.style.top=pagey+"px";
+        bgceng.style.backgroundPosition=(-pagex*2.32)+"px "+(-pagey*2.32)+"px";
+    }
+</script>
+</body>
+
+</html>

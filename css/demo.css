@@ -1,0 +1,55 @@
+*{/*建议每次写css，最开始就把内边距 外边距消掉*/
+    margin: 0;
+    padding: 0;
+}
+.par{/*设置盒子per的样式*/
+    position: relative;/*相对定位 设置图层的时候记得要把父容器设置为相对定位*/
+    width: 323px;
+    height: 506px;
+    /*border: 1px solid silver;*/
+    margin-left: 205px;
+}
+#bgceng{/*放大镜大图显示位置*/
+    width: 323px;
+    height: 430px;
+    border: 1px solid red;
+    position: absolute;/*图层要设置绝对定位*/
+    z-index: 3;/*第三层*/
+    display: none;/*页面加载不显示*/
+    left: 325px;
+    background-size: 750px 1000px;/*背景大小*/
+}
+.middle_img{
+    position: relative;/*中图盒子设置相对定位 因为他上边有图层*/
+    width: 323px;
+    height: 430px;
+    border: 1px solid silver;/*下边线*/
+}
+.middle_img>img {
+    width: 100%;
+    height: 100%;
+}
+#ceng{/*放大镜*/
+    border: 1px solid red;
+    position: absolute;/*图层绝对定位*/
+    z-index: 2;/*第二层*/
+    display: none;/*页面加载不显示*/
+    background: cornflowerblue;
+}
+.small_img{
+    width: 323px;
+    height: 76px;
+    text-align: center;/*水平居中*/
+    line-height: 76px;/*给父容器加行高*/
+}
+.small_img>div{
+    display: inline-block;/*保持块元素特性，但改为行内元素显示*/
+    width: 57px;
+    height: 60px;
+    border: 1px solid white;
+    vertical-align: middle;/*加完行高垂直居中*/
+}
+/*.small_img>div>img{
+    width: 100%;
+    height: 100%;
+}*//*填充样式，我加完不好看就不加了*/
